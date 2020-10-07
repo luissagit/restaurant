@@ -1,9 +1,11 @@
 import FavoriteRestaurantSearchPresenter from '../src/scripts/views/pages/liked-restaurants/favorite-restaurant-search-presenter';
 import FavoriteRestaurantIdb from '../src/scripts/data/favorite-restaurant-idb';
+import FavoriteRestaurantSearchView from '../src/scripts/views/pages/liked-restaurants/favorite-restaurant-search-view';
 
 describe('Searching Restaurants', () => {
 	let presenter;
 	let favoriteRestaurants;
+	let view;
 
 	const searchRestaurants = (query) => {
 		const queryElement = document.getElementById('query');
@@ -12,21 +14,15 @@ describe('Searching Restaurants', () => {
 	};
 
 	const setRestaurantSearchContainer = () => {
-		document.body.innerHTML = `
-			<div id="restaurant-search-container">
-				<input type="text" id="query" />
-				<div class="restaurant-result-container">
-					<ul class="restaurants">
-					</ul>
-				</div>
-			</div>
-		`;
+		view = new FavoriteRestaurantSearchView();
+		document.body.innerHTML = view.getTemplate();
 	};
 
 	const constructPresenter = () => {
 		favoriteRestaurants = spyOnAllFunctions(FavoriteRestaurantIdb);
 		presenter = new FavoriteRestaurantSearchPresenter({
 			favoriteRestaurants,
+			view,
 		});
 	};
 
@@ -47,35 +43,6 @@ describe('Searching Restaurants', () => {
 
 			expect(favoriteRestaurants.searchRestaurants)
 				.toHaveBeenCalledWith('restaurant a');
-		});
-
-		it('should show the found restaurant', async () => {
-			presenter._showFoundRestaurants([{id: 1}]);
-			expect(document.querySelectorAll('.restaurant').length).toEqual(1);
-
-			presenter._showFoundRestaurants([{id: 1, name: 'Satu'}, {id: 2, name: 'Dua'}]);
-			expect(document.querySelectorAll('.restaurant').length).toEqual(2);
-		});
-
-		it('should show the name of the found restaurants', async () => {
-			presenter._showFoundRestaurants([{id: 1, name: 'Satu'}]);
-			expect(document.querySelectorAll('.restaurant__name').item(0).textContent)
-				.toEqual('Satu');
-
-			presenter._showFoundRestaurants([
-				{id: 1, name: 'Satu'},
-				{id: 2, name: 'Dua'},
-			]);
-
-			const restaurantName = document.querySelectorAll('.restaurant__name');
-			expect(restaurantName.item(0).textContent).toEqual('Satu');
-			expect(restaurantName.item(1).textContent).toEqual('Dua');
-		});
-
-		it('should show - for found restaurant without name', async () => {
-			presenter._showFoundRestaurants([{id: 1}]);
-			expect(document.querySelectorAll('.restaurant__name').item(0).textContent)
-				.toEqual('-');
 		});
 
 		it('should show the restaurants found by Favorite Restaurants', (done) => {
@@ -108,6 +75,18 @@ describe('Searching Restaurants', () => {
 				{id: 3, name: 'kios dan angkringan'},
 			]);
 			searchRestaurants('angkringan');
+		});
+
+		it('should show - when the restaurant returned does not contain a title', (done) => {
+			document.getElementById('restaurant-search-container').addEventListener('restaurants:searched:updated', () => {
+				const restaurantNames = document.querySelectorAll('.restaurant__name');
+				expect(restaurantNames.item(0).textContent).toEqual('-');
+				done();
+			});
+			favoriteRestaurants.searchRestaurants.withArgs('restaurant a').and.returnValues([
+				{id: 4444},
+			]);
+			searchRestaurants('restaurant a');
 		});
 	});
 

@@ -1,5 +1,43 @@
 import API_ENDPOINT from '../../globals/api-endpoint.js';
 
+const createRestaurantItemTemplate = (restaurant) => {
+	const rating = Math.round(restaurant.rating);
+	let ratings = ``;
+	const desc = restaurant.description;
+
+	for (let r = 0; r < rating; r++) {
+		ratings += `<img src="./icons/star.png" alt="rate" class="rate__icon"/>`;
+	}
+
+	const restaurantImage = `
+		<div class="restaurant__image">
+			<img src=${API_ENDPOINT.THUMBNAIL}${restaurant.pictureId} alt="restauran ${restaurant.name}" crossorigin="anonymous"/>
+		</div>
+	`;
+
+	const restaurantLabel = `
+		<div class="restaurant__label">
+			<h2>${restaurant.name}</h2>
+			<p>${ratings}</p>
+			<p><img src="./icons/map.png" alt="Location : " class="location__icon"/> ${restaurant.city}</p>
+			<p class="restaurant__desc">${desc.substring(0, 50)}...</p>
+		</div>
+	`;
+
+	const restaurantItem = `
+		<div class="restaurant-item">
+			<a href="${`/#/detail/${restaurant.id}`}">
+				<div class="restaurant" tabindex="0" aria-label="restauran ${restaurant.name} merupakan restoran bintang ${rating} yang terletak di ${restaurant.city}. ${restaurant.description}.">
+					${restaurantImage}
+					${restaurantLabel}
+				</div>
+			</a>
+		</div>
+	`;
+
+	return restaurantItem;
+};
+
 const createRestaurantListTemplate = (restaurants) => {
 	let restaurantsList = ``;
 
@@ -207,4 +245,5 @@ export {
 	createRestaurantDetailTemplate,
 	createLikeRestaurantButtonTemplate,
 	createUnlikeRestaurantButtonTemplate,
+	createRestaurantItemTemplate,
 };
