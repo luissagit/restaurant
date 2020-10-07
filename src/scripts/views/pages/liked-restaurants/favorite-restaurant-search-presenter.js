@@ -11,17 +11,33 @@ class FavoriteRestaurantSearchPresenter {
 		});
 	}
 
-	_searchRestaurants(latestQuery) {
-		this._latestQuery = latestQuery;
-		this._favoriteRestaurants.searchRestaurants(this._latestQuery);
+	async _searchRestaurants(latestQuery) {
+		this._latestQuery = latestQuery.trim();
+
+		let foundRestaurants;
+		if (this.latestQuery.length > 0) {
+			foundRestaurants = await this._favoriteRestaurants.searchRestaurants(this.latestQuery);
+		} else {
+			foundRestaurants = await this._favoriteRestaurants.getAllRestaurant();
+		}
+
+		this._showFoundRestaurants(foundRestaurants);
 	}
 
 	_showFoundRestaurants(restaurants) {
-		const html = restaurants.reduce(
-			(carry, restaurant) => carry.concat(`<li class="restaurant"><span class="restaurant__name">${restaurant.name || '-'}</span></li>`),
-			'',
-		);
+		let html;
+
+		if (restaurants.length > 0) {
+			html = restaurants.reduce(
+				(carry, restaurant) => carry.concat(`<li class="restaurant"><span class="restaurant__name">${restaurant.name || '-'}</span></li>`),
+				'',
+			);
+		} else {
+			html = `<div class="restaurants__not__found">Restaurant Tak Ditemukan</div>`;
+		}
 		document.querySelector('.restaurants').innerHTML = html;
+		document.getElementById('restaurant-search-container')
+			.dispatchEvent(new Event('restaurants:searched:updated'));
 	}
 
 	get latestQuery() {
