@@ -51,8 +51,8 @@ const _dummySubmit = (dummyreview) => {
 		const date = new Date().toLocaleDateString('id-ID', settings);
 		const submittedReview = `
 			<div class="review">
-				<h4>${dummyreview.name}</h4><div class="date"> pada ${date}</div>
-				<p>${dummyreview.review}</p>
+				<h4 class="dummy__name">${dummyreview.name}</h4><div class="date"> pada ${date}</div>
+				<p class="dummy__review">${dummyreview.review}</p>
 			</div>
 		`;
 		const response = document.querySelector('.review__list').innerHTML+= submittedReview;

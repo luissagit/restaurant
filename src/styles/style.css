@@ -636,3 +636,34 @@ input[type="submit"]:hover, input[type="submit"]:active {
 	text-align : center;
 	font-size : 16px;
 }
+
+
+
+.content {
+	margin-top: 100px;
+	color: orange;
+	text-align: center;
+}
+
+.content a {
+	text-decoration: none;
+}
+
+.content h2 {
+	margin: 10px;
+	font-size: 18px;
+}
+
+.content input {
+	font-size: 16px;
+	padding: 10px;
+}
+
+.restaurant-item__not__found {
+	margin-top: 10px;
+	font-size: 14px;
+}
+
+.restaurant__label {
+	text-align: left;
+}

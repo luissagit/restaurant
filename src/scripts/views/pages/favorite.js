@@ -8,6 +8,10 @@ const view = new FavoriteRestaurantSearchView();
 
 const Favorite = {
 	async render() {
+		document.body.scrollTop = 0;
+		document.documentElement.scrollTop = 0;
+		const heroElem = document.querySelector('.hero');
+		heroElem.classList.add('none');
 		return view.getTemplate();
 	},
 

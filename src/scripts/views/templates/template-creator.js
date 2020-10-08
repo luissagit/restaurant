@@ -51,7 +51,7 @@ const createRestaurantListTemplate = (restaurants) => {
 
 		const restaurantLabel = `
 			<div class="restaurant__label">
-				<h2>${restaurants[i].name}</h2>
+				<h2 class="restaurant__name">${restaurants[i].name}</h2>
 				<p>${ratings}</p>
 				<p><img src="./icons/map.png" alt="Location : " class="location__icon"/> ${restaurants[i].city}</p>
 				<p class="restaurant__desc">${desc.substring(0, 50)}...</p>
@@ -101,7 +101,7 @@ const createAboutSection = (restaurant) => {
 	const aboutSection = `
 		<div class="about-section">
 			<img src=${API_ENDPOINT.LARGE}${restaurant.pictureId} alt='${restaurant.name}' crossorigin="anonymous"/>
-			<h2>${restaurant.name}</h2>
+			<h2 class="restaurant__name">${restaurant.name}</h2>
 			<div class="categories">
 				${categories}
 			</div>
@@ -180,8 +180,8 @@ const createReviewsSection = (reviews) => {
 
 		reviewsSection += `
 			<div class="review">
-				<h4>${review.name}</h4><div class="date"> pada ${review.date}</div>
-				<p>${reviewContent}</p>
+				<h4 class="real__name">${review.name}</h4><div class="date"> pada ${review.date}</div>
+				<p class="real__review">${reviewContent}</p>
 			</div>
 		`;
 	});

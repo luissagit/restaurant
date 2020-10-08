@@ -4,9 +4,9 @@ class FavoriteRestaurantSearchView {
 	getTemplate() {
 		return `
 		<div class="content">
-			<input type="text" id="query"/>
+			<input type="text" id="query" placeholder="cari restoran"/>
 			<h2 class="content__heading">Your Favorite Restaurants</h2>
-				<div class="restaurants" id="restaurants"></div>
+				<div class="restaurants restaurants__list" id="restaurants"></div>
 				</div>
 			</div>
 		</div>
