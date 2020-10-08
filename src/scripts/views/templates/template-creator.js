@@ -69,7 +69,7 @@ const createRestaurantListTemplate = (restaurants) => {
 		if (i % 2 === 0) {
 			restaurantsList += `
 				<a href="${`/#/detail/${restaurants[i].id}`}">
-					<div class="restaurant" tabindex="0" aria-label="restauran ${restaurants[i].name} merupakan restoran bintang ${rating} yang terletak di ${restaurants[i].city}. ${restaurants[i].description}.">
+					<div class="restaurant" tabindex="0" aria-label="restauran ${restaurants[i].name} merupakan restoran bintang ${rating} yang terletak di ${restaurants[i].city}.">
 						${restaurantLabel}
 						${restaurantImage}
 					</div>
@@ -78,7 +78,7 @@ const createRestaurantListTemplate = (restaurants) => {
 		} else {
 			restaurantsList += `
 			<a href="${`/#/detail/${restaurants[i].id}`}">
-				<div class="restaurant" tabindex="0" aria-label="restauran ${restaurants[i].name} merupakan restoran bintang ${rating} yang terletak di ${restaurants[i].city}. ${restaurants[i].description}.">
+				<div class="restaurant" tabindex="0" aria-label="restauran ${restaurants[i].name} merupakan restoran bintang ${rating} yang terletak di ${restaurants[i].city}.">
 					${restaurantImage}
 					${restaurantLabel}
 				</div>
