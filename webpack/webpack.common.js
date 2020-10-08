@@ -4,6 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const workboxPlugin = require('workbox-webpack-plugin');
+const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
+const ImageminMozjpeg = require('imagemin-mozjpeg');
 const path = require('path');
 
 module.exports = {
@@ -69,6 +71,14 @@ module.exports = {
 		}),
 		new workboxPlugin.InjectManifest({
 			swSrc: path.resolve(__dirname, '../src/scripts/sw.js'),
+		}),
+		new ImageminWebpackPlugin({
+			plugins: [
+				ImageminMozjpeg({
+					quality: 50,
+					progressive: true,
+				}),
+			],
 		}),
 	],
 };

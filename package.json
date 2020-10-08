@@ -7,6 +7,7 @@
     "lint": "eslint ./src",
     "start-dev": "webpack-dev-server --config webpack/webpack.dev.js",
     "build": "webpack --config webpack/webpack.prod.js",
+    "build-image": "node sharp.js",
     "test": "karma start",
     "e2e": "codeceptjs run --steps"
   },
@@ -27,6 +28,8 @@
     "favicons-webpack-plugin": "^4.2.0",
     "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.4.1",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-webpack-plugin": "^2.4.2",
     "jasmine-ajax": "^4.0.0",
     "jasmine-core": "^3.5.0",
     "karma": "^5.1.0",
@@ -37,6 +40,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
     "puppeteer": "^5.3.1",
+    "sharp": "^0.26.1",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
@@ -48,6 +52,7 @@
   },
   "dependencies": {
     "idb": "^5.0.4",
+    "lazysizes": "^5.2.2",
     "regenerator-runtime": "^0.13.7",
     "serviceworker-webpack-plugin": "^1.0.1",
     "workbox-window": "^5.1.4"

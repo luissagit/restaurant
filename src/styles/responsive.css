@@ -1,4 +1,8 @@
 @media screen and (max-width: 499px) {
+    .hero {
+        background-image: url("../public/images/heros/hero-image3-small.jpg");
+    }
+
     .header {
         display : grid;
         grid-template-columns : 3fr 1fr;

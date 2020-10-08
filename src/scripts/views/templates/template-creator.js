@@ -1,3 +1,5 @@
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import API_ENDPOINT from '../../globals/api-endpoint.js';
 
 const createRestaurantItemTemplate = (restaurant) => {
@@ -11,7 +13,7 @@ const createRestaurantItemTemplate = (restaurant) => {
 
 	const restaurantImage = `
 		<div class="restaurant__image">
-			<img src=${API_ENDPOINT.THUMBNAIL}${restaurant.pictureId} alt="restauran ${restaurant.name || '-'}" crossorigin="anonymous"/>
+			<img class="lazyload" data-src=${API_ENDPOINT.THUMBNAIL}${restaurant.pictureId} alt="restauran ${restaurant.name || '-'}" crossorigin="anonymous"/>
 		</div>
 	`;
 
@@ -60,7 +62,7 @@ const createRestaurantListTemplate = (restaurants) => {
 
 		const restaurantImage = `
 			<div class="restaurant__image">
-				<img src=${API_ENDPOINT.THUMBNAIL}${restaurants[i].pictureId} alt="restauran ${restaurants[i].name}" crossorigin="anonymous"/>
+				<img class="lazyload" data-src=${API_ENDPOINT.THUMBNAIL}${restaurants[i].pictureId} alt="restauran ${restaurants[i].name}" crossorigin="anonymous"/>
 			</div>
 		`;
 
@@ -100,7 +102,11 @@ const createAboutSection = (restaurant) => {
 
 	const aboutSection = `
 		<div class="about-section">
-			<img src=${API_ENDPOINT.LARGE}${restaurant.pictureId} alt='${restaurant.name}' crossorigin="anonymous"/>
+			<img class="lazyload" data-src=${API_ENDPOINT.LARGE}${restaurant.pictureId}
+				srcset="${API_ENDPOINT.MEDIUM}${restaurant.pictureId} 480w, ${API_ENDPOINT.LARGE}${restaurant.pictureId} 800w"
+				sizes="(max-width: 600px) 480px, 800px"
+				alt='${restaurant.name}'
+				crossorigin="anonymous"/>
 			<h2 class="restaurant__name">${restaurant.name}</h2>
 			<div class="categories">
 				${categories}
