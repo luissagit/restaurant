@@ -11,23 +11,22 @@ const createRestaurantItemTemplate = (restaurant) => {
 
 	const restaurantImage = `
 		<div class="restaurant__image">
-			<img src=${API_ENDPOINT.THUMBNAIL}${restaurant.pictureId} alt="restauran ${restaurant.name}" crossorigin="anonymous"/>
+			<img src=${API_ENDPOINT.THUMBNAIL}${restaurant.pictureId} alt="restauran ${restaurant.name || '-'}" crossorigin="anonymous"/>
 		</div>
 	`;
 
 	const restaurantLabel = `
 		<div class="restaurant__label">
-			<h2>${restaurant.name}</h2>
+			<h2 class="restaurant__name">${restaurant.name || '-'}</h2>
 			<p>${ratings}</p>
 			<p><img src="./icons/map.png" alt="Location : " class="location__icon"/> ${restaurant.city}</p>
-			<p class="restaurant__desc">${desc.substring(0, 50)}...</p>
 		</div>
 	`;
 
 	const restaurantItem = `
 		<div class="restaurant-item">
 			<a href="${`/#/detail/${restaurant.id}`}">
-				<div class="restaurant" tabindex="0" aria-label="restauran ${restaurant.name} merupakan restoran bintang ${rating} yang terletak di ${restaurant.city}. ${restaurant.description}.">
+				<div class="restaurant" tabindex="0" aria-label="restauran ${restaurant.name || '-'}.">
 					${restaurantImage}
 					${restaurantLabel}
 				</div>
